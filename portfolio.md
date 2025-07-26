@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Portfolio
-image: assets/images/pic01.jpg
+permalink: /portfolio/
 nav-menu: true
 ---
 
@@ -15,21 +15,35 @@ nav-menu: true
             <h1>Portfolio</h1>
         </header>
 
-        <!-- Portfolio Items -->
-        {% assign items = "Project One,Project Two,Project Three,Project Four,Project Five,Project Six,Project Seven,Project Eight,Project Nine,Project Ten" | split: "," %}
-        {% for item in items %}
-        {% assign index = forloop.index0 %}
-        {% assign image = index | modulo: 5 | plus: 8 | prepend: 'assets/images/pic0' | append: '.jpg' %}
-        <p>
-            {% if index | modulo: 2 == 0 %}
-            <span class="image left"><img src="{% link {{ image }} %}" alt="{{ item }}" /></span>
-            {% else %}
-            <span class="image right"><img src="{% link {{ image }} %}" alt="{{ item }}" /></span>
-            {% endif %}
-            <strong>{{ item }}</strong><br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod, nisi vel consectetur interdum, nisl nisi vehicula nisl, vitae placerat justo nisl in nunc. Suspendisse potenti. Integer nec odio a diam elementum fringilla non in massa.
-        </p>
-        {% endfor %}
+        <p><span class="image left"><img src="assets/images/pic01.jpg" alt="" /></span><strong>Project One</strong><br />
+        Description of project one. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image right"><img src="assets/images/pic02.jpg" alt="" /></span><strong>Project Two</strong><br />
+        Description of project two. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image left"><img src="assets/images/pic03.jpg" alt="" /></span><strong>Project Three</strong><br />
+        Description of project three. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image right"><img src="assets/images/pic04.jpg" alt="" /></span><strong>Project Four</strong><br />
+        Description of project four. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image left"><img src="assets/images/pic05.jpg" alt="" /></span><strong>Project Five</strong><br />
+        Description of project five. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image right"><img src="assets/images/pic06.jpg" alt="" /></span><strong>Project Six</strong><br />
+        Description of project six. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image left"><img src="assets/images/pic07.jpg" alt="" /></span><strong>Project Seven</strong><br />
+        Description of project seven. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image right"><img src="assets/images/pic08.jpg" alt="" /></span><strong>Project Eight</strong><br />
+        Description of project eight. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image left"><img src="assets/images/pic09.jpg" alt="" /></span><strong>Project Nine</strong><br />
+        Description of project nine. A brief explanation of the work done, tools used, and outcome of the project.</p>
+
+        <p><span class="image right"><img src="assets/images/pic10.jpg" alt="" /></span><strong>Project Ten</strong><br />
+        Description of project ten. A brief explanation of the work done, tools used, and outcome of the project.</p>
 
     </div>
 </section>
