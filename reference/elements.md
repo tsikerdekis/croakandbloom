@@ -1,9 +1,3 @@
----
-layout: page
-title: Elements
-image: assets/images/pic01.jpg
-nav-menu: false
----
 
 <!-- Main -->
 <div id="main" class="alt">
