@@ -8,4 +8,4 @@ author: null
 show_tile: false
 ---
 
-Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.
+Croak and Bloom LLC is a small-batch pottery and handcrafted giftware studio founded by artist Anna Poupa in Bellingham, Washington. What began as creating unique ceramic pieces for friends has grown into a full home-based studio offering speckled stoneware vessels and gifts featured in collaborations with designers. The business launched its Etsy shop in 2018 and continues to blend minimalist, nature-inspired design with functional artistry for everyday use.
