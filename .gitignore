@@ -4,3 +4,23 @@ _site/
 Gemfile.lock
 *.gem
 .jekyll-cache
+
+# Local Ruby / Bundler
+vendor/bundle/
+.bundle/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Node dependencies
+node_modules/
+
+# Environment & temporary files
+.env
+tmp/
+*.log
+coverage/
