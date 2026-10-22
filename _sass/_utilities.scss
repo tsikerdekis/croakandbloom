@@ -1,0 +1,63 @@
+// =====================================================================
+// _utilities.scss — small helpers used throughout.
+// =====================================================================
+
+.text-center  { text-align: center; }
+.text-left    { text-align: left; }
+.text-right   { text-align: right; }
+
+.muted        { color: var(--fg-muted); }
+.muted-light  { color: var(--fg-light); }
+.accent-color { color: var(--accent); }
+.ink-color    { color: var(--ink); }
+.bg-alt       { background: var(--bg-alt); }
+.bg-elev      { background: var(--bg-elev); }
+
+.uppercase    { text-transform: uppercase; letter-spacing: var(--ls-label); }
+.italic       { font-style: italic; }
+.serif        { font-family: var(--font-display); }
+.sans         { font-family: var(--font-body); }
+
+.mt-0  { margin-top: 0; }
+.mt-2  { margin-top: var(--space-2); }
+.mt-4  { margin-top: var(--space-4); }
+.mt-6  { margin-top: var(--space-6); }
+.mt-8  { margin-top: var(--space-8); }
+
+.mb-0  { margin-bottom: 0; }
+.mb-2  { margin-bottom: var(--space-2); }
+.mb-4  { margin-bottom: var(--space-4); }
+.mb-6  { margin-bottom: var(--space-6); }
+.mb-8  { margin-bottom: var(--space-8); }
+
+.py-6  { padding-block: var(--space-6); }
+.py-8  { padding-block: var(--space-8); }
+.px-5  { padding-inline: var(--space-5); }
+
+.flex        { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between{ display: flex; align-items: center; justify-content: space-between; }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+.grid { display: grid; }
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.aspect-square  { aspect-ratio: 1 / 1; }
+.aspect-4-5     { aspect-ratio: 4 / 5; }
+.aspect-3-2     { aspect-ratio: 3 / 2; }
+.aspect-16-9    { aspect-ratio: 16 / 9; }
+
+.flow > * + * { margin-top: var(--space-4); }
+.flow-lg > * + * { margin-top: var(--space-6); }

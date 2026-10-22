@@ -1,0 +1,17 @@
+{%- comment -%}
+  default.html — base layout. All other layouts extend this.
+{%- endcomment -%}
+<!doctype html>
+<html lang="en-US">
+  <head>{% include head.html %}</head>
+  <body class="fade-in">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="wrapper">
+      {% include header.html %}
+      <main id="main" role="main">
+        {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
+  </body>
+</html>

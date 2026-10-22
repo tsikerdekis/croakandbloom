@@ -1,0 +1,25 @@
+{%- comment -%}
+  work-card.html — reusable work grid item.
+  Usage: {% include work-card.html work=work %}
+{%- endcomment -%}
+<a class="work-card" href="{{ work.url | relative_url }}" aria-label="View {{ work.title | escape }}">
+  <div class="work-card__media">
+    {%- if work.image -%}
+      <img class="work-card__img"
+           src="{{ work.image | relative_url }}"
+           alt="{{ work.alt | default: work.title | escape }}"
+           loading="lazy" decoding="async"
+           width="800" height="800">
+    {%- else -%}
+      <div style="width:100%;height:100%;background:var(--bg-alt);"></div>
+    {%- endif -%}
+  </div>
+  <div class="work-card__caption">
+    <span class="work-card__title">{{ work.title }}</span>
+    {%- if work.materials and work.materials != "" -%}
+      <span class="work-card__meta">{{ work.materials | truncate: 24 }}</span>
+    {%- elsif work.year and work.year != "" -%}
+      <span class="work-card__meta">{{ work.year }}</span>
+    {%- endif -%}
+  </div>
+</a>

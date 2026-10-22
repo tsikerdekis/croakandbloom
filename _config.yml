@@ -1,44 +1,103 @@
-# site settings
+# =====================================================================
+# Croak and Bloom — modern ceramicist site
+# =====================================================================
+
+# Site identity
 title: Croak and Bloom
-subtitle: Handmade Pottery and Gifts
-email: anna@croakandbloom.com
-description: 🙌 Small-batch Pottery & Giftware. As featured on BuzzFeed, The Seattle Times, and Washington Wedding Day Magazine 🥂 Wholesale/Custom/Collabs 💌 DM
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: # the base hostname & protocol for your site
-author: Anna
-street_address:
-city: Bellingham
-state: WA
-zip_code: 98226
-country: United States of America
-phone:
+tagline: Handmade pottery from Bellingham, Washington
+description: >-
+  Small-batch stoneware vessels and giftware by ceramic artist Anna Poupa.
+  Handmade in Bellingham, Washington. Featured in BuzzFeed, The Seattle Times,
+  and Washington Wedding Day Magazine.
+author:
+  name: Anna Poupa
+  email: anna@croakandbloom.com
+  location: Bellingham, Washington, USA
+  social:
+    instagram: https://www.instagram.com/croakandbloom/
+    linkedin: https://www.linkedin.com/in/anna-poupa-tsikerdekis-b88a345b/
+    etsy: https://www.etsy.com/shop/CroakandBloom
 
-# homepage tiles
-tiles-source: pages # accepts "posts" or "pages"
-tiles-count: 6
+# Hostname & base
+baseurl: ""
+url: "https://new.croakandbloom.com"
 
-# social settings (key must match name of font awesome icon)
-# see https://fontawesome.com/icons?d=gallery&p=2&s=brands
-# Icons are not shown if value is empty
-# You need to restart jekyll for changes to have an effect
-socials:
-  GitHub: 
-  GitLab:
-  Google-Plus: 
-  Instagram: https://www.instagram.com/croakandbloom/
-  LinkedIn: https://www.linkedin.com/in/anna-poupa-tsikerdekis-b88a345b/
-  Twitter: 
-  Facebook:
-  Slack:
-
-# build settings
+# Build settings
 markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+timezone: America/Los_Angeles
 
 sass:
   style: compressed
+  quiet_deps: true
 
+plugins:
+  - jekyll-sass-converter
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections
+collections:
+  works:
+    output: true
+    permalink: /work/:path/
+  collections_dir:
+    output: true
+    permalink: /collections/:path/
+  journal:
+    output: true
+    permalink: /journal/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: works
+    values:
+      layout: work-detail
+      materials: ""
+      dimensions: ""
+      year: ""
+      sold: false
+      featured: false
+      gallery: []
+  - scope:
+      path: ""
+      type: collections_dir
+    values:
+      layout: collection-detail
+      summary: ""
+  - scope:
+      path: ""
+      type: journal
+    values:
+      layout: journal-detail
+  - scope:
+      path: ""
+    values:
+      layout: default
+      nav-menu: false
+
+# Build exclusions
 exclude:
-- "*.gemspec"
-- LICENSE.md
-- CONTRIBUTING.md
-- README.md 
+  - "*.gemspec"
+  - "LICENSE.md"
+  - "CONTRIBUTING.md"
+  - "README.md"
+  - "Gemfile.lock"
+  - "vendor"
+  - ".bundle"
+  - "node_modules"
+  - "docs"
+  - "lighthouse.md"
+  - "a11y.md"
+  - ".github"
+  - "AGENTS.md"
+  - "tools"
+  - "tmp"
+  - "tmp_preview"
+  - "tmp_preview2"
+  - "assets/images/desc.txt"
+  - "assets/images/instagram_posts_map.txt"
+  - "assets/images/REPLACEMENT-REPORT.md"
+  - "*.log"

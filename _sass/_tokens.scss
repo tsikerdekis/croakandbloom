@@ -1,0 +1,102 @@
+// =====================================================================
+// _tokens.scss — Design tokens exposed as CSS custom properties.
+// =====================================================================
+
+:root {
+  // Color — warm bisque / clay palette
+  --bg:           #FAF7F2;   // page background (warm off-white)
+  --bg-alt:       #F1ECE3;   // alt sections / header band
+  --bg-elev:      #FFFFFF;   // elevated surfaces (cards, modals)
+  --ink:          #1A1714;   // headings on light
+  --fg:           #2A2622;   // body text
+  --fg-muted:     #6B6258;   // meta, captions
+  --fg-light:     #968B7C;   // lightest text
+  --border:       #E5DED2;   // hairlines
+  --border-strong:#D4C9B5;
+  --accent:       #8B5E3C;   // clay / terracotta
+  --accent-soft:  #C89B7B;   // hover, secondary
+  --accent-deep:  #6B4429;
+  --link:         #8B5E3C;
+  --link-hover:   #6B4429;
+  --success:      #4A6B3A;
+  --error:        #A8483A;
+
+  // Inverse (for dark sections)
+  --bg-inv:       #1F1B16;
+  --fg-inv:       #F1ECE3;
+  --fg-inv-muted: #B7AB97;
+  --border-inv:   #3A332A;
+
+  // Typography
+  --font-display: "Cormorant Garamond", "Garamond", "Georgia", serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-brush:   "Breathing", cursive;
+
+  // Type scale (modular, ratio 1.333)
+  --fs-xs:    0.875rem;  // 14
+  --fs-sm:    1rem;      // 16
+  --fs-base:  1.125rem;  // 18
+  --fs-md:    1.25rem;   // 20
+  --fs-lg:    1.5rem;    // 24
+  --fs-xl:    2rem;      // 32
+  --fs-2xl:   2.625rem;  // 42
+  --fs-3xl:   3.5rem;    // 56
+  --fs-4xl:   4.75rem;   // 76
+
+  // Line heights
+  --lh-tight:  1.1;
+  --lh-snug:   1.25;
+  --lh-base:   1.6;
+  --lh-loose:  1.75;
+
+  // Letter spacing
+  --ls-tight:  -0.01em;
+  --ls-normal: 0;
+  --ls-wide:   0.04em;
+  --ls-label:  0.18em;
+
+  // Spacing (8pt grid)
+  --space-1:  0.25rem;  // 4
+  --space-2:  0.5rem;   // 8
+  --space-3:  0.75rem;  // 12
+  --space-4:  1rem;     // 16
+  --space-5:  1.5rem;   // 24
+  --space-6:  2rem;     // 32
+  --space-7:  3rem;     // 48
+  --space-8:  4rem;     // 64
+  --space-9:  6rem;     // 96
+  --space-10: 8rem;     // 128
+
+  // Layout
+  --container: 76rem;     // 1216
+  --reading:   38rem;     // 608
+  --measure:   66ch;
+
+  // Borders & radii
+  --radius-sm: 2px;
+  --radius:    4px;
+  --radius-lg: 8px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  // Shadows
+  --shadow-sm:  0 1px 2px rgba(26, 23, 20, 0.04);
+  --shadow:     0 4px 12px rgba(26, 23, 20, 0.06);
+  --shadow-md:  0 8px 24px rgba(26, 23, 20, 0.08);
+  --shadow-lg:  0 16px 48px rgba(26, 23, 20, 0.12);
+
+  // Motion
+  --ease:        cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --dur-fast:    150ms;
+  --dur:         240ms;
+  --dur-slow:    480ms;
+
+  // Z-index
+  --z-base:    1;
+  --z-sticky:  100;
+  --z-header:  200;
+  --z-overlay: 900;
+  --z-modal:   1000;
+}

@@ -1,9 +1,330 @@
-<head>
-	<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<!--[if lte IE 8]><script src="{{ "assets/js/ie/html5shiv.js" | relative_url }}"></script><![endif]-->
-	<link rel="stylesheet" href="{{ "assets/css/main.css" | relative_url }}" />
-	<!--[if lte IE 9]><link rel="stylesheet" href="{{ "assets/css/ie9.css" | relative_url }}" /><![endif]-->
-	<!--[if lte IE 8]><link rel="stylesheet" href="{{ "assets/css/ie8.css" | relative_url }}" /><![endif]-->
-</head>
+{%- comment -%}
+  head.html — site head, meta, OG, Twitter, JSON-LD, fonts.
+{%- endcomment -%}
+{%- assign site_title       = page.title | default: site.title | escape -%}
+{%- assign site_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
+{%- assign page_url         = page.url | absolute_url -%}
+{%- assign og_image_path    = page.image | default: '/assets/images/og-default.jpg' -%}
+{%- assign og_image         = og_image_path | absolute_url -%}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8B5E3C">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="{{ site.author.name }}">
+{%- if page.layout == 'work-detail' or page.layout == 'collection-detail' or page.layout == 'journal-detail' -%}
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+{%- else -%}
+  <meta name="robots" content="index, follow">
+{%- endif -%}
+
+<title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{{ site_description }}">
+
+<link rel="canonical" href="{{ page_url }}">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="{% if page.layout == 'work-detail' %}product{% elsif page.layout == 'journal-detail' %}article{% else %}website{% endif %}">
+<meta property="og:site_name"   content="{{ site.title }}">
+<meta property="og:title"       content="{{ site_title }}">
+<meta property="og:description" content="{{ site_description }}">
+<meta property="og:url"         content="{{ page_url }}">
+<meta property="og:image"       content="{{ og_image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@croakandbloom">
+<meta name="twitter:creator"     content="@croakandbloom">
+<meta name="twitter:title"       content="{{ site_title }}">
+<meta name="twitter:description" content="{{ site_description }}">
+<meta name="twitter:image"       content="{{ og_image }}">
+
+<!-- Preconnect to font CDN -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap"></noscript>
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+{%- comment -%} JSON-LD: Person / Organization / WebSite / LocalBusiness / BreadcrumbList {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ site.url }}/#person",
+      "name": "{{ site.author.name }}",
+      "url": "{{ site.url }}",
+      "email": "mailto:{{ site.author.email }}",
+      "jobTitle": "Ceramic Artist",
+      "worksFor": { "@id": "{{ site.url }}/#organization" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bellingham",
+        "addressRegion": "WA",
+        "postalCode": "98226",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "{{ site.author.social.instagram }}",
+        "{{ site.author.social.linkedin }}",
+        "{{ site.author.social.etsy }}"
+      ],
+      "knowsAbout": ["Ceramics", "Pottery", "Handmade Pottery", "Stoneware", "Wheel Thrown Pottery"]
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}",
+      "logo": "{{ site.url }}/assets/images/og-default.jpg",
+      "description": "{{ site.description | strip_newlines | escape }}",
+      "foundingDate": "2018",
+      "founder": { "@id": "{{ site.url }}/#person" },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "{{ site.author.email }}",
+        "contactType": "customer service",
+        "areaServed": "US",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "{{ site.author.social.instagram }}",
+        "{{ site.author.social.etsy }}"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "{{ site.url }}/#localbusiness",
+      "name": "{{ site.title }}",
+      "description": "Small-batch stoneware pottery studio in Bellingham, Washington. Handmade mugs, vases, bowls, and giftware.",
+      "url": "{{ site.url }}",
+      "image": "{{ site.url }}/assets/images/banner.jpg",
+      "telephone": "",
+      "email": "{{ site.author.email }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bellingham",
+        "addressRegion": "WA",
+        "postalCode": "98226",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.7519,
+        "longitude": -122.4787
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Bellingham" },
+        { "@type": "State", "name": "Washington" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "isicV4": "3399",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Pottery Collections",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Mugs",
+            "url": "{{ site.url }}/collections/mugs/"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Vases & Vessels",
+            "url": "{{ site.url }}/collections/vases-vessels/"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Planters",
+            "url": "{{ site.url }}/collections/planters/"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Kitchen & Giftware",
+            "url": "{{ site.url }}/collections/kitchen-giftware/"
+          }
+        ]
+      },
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Pottery Orders",
+            "description": "Custom branded mugs, wedding favors, and restaurant tableware."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Wholesale Pottery",
+            "description": "Small-batch wholesale for retail shops and boutiques."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}",
+      "name": "{{ site.title }}",
+      "description": "{{ site.description | strip_newlines | escape }}",
+      "publisher": { "@id": "{{ site.url }}/#organization" },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ site.url }}/work/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+{%- comment -%} BreadcrumbList JSON-LD {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}/"
+    }
+    {%- assign crumbs = page.url | replace: '/', ' ' | strip | split: ' ' | compact -%}
+    {%- if crumbs.size > 0 -%}
+      {%- for crumb in crumbs limit:crumbs.size -%}
+        ,{
+          "@type": "ListItem",
+          "position": {{ forloop.index | plus: 1 }},
+          "name": "{{ crumb | capitalize }}",
+          "item": "{{ site.url }}/{{ crumb }}/"
+        }
+      {%- endfor -%}
+    {%- endif -%}
+    {%- if page.title and page.url != '/' -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ crumbs.size | plus: 2 }},
+        "name": "{{ page.title | escape }}",
+        "item": "{{ page_url }}"
+      }
+    {%- endif -%}
+  ]
+}
+</script>
+
+{%- if page.layout == 'work-detail' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | default: page.excerpt | default: site_description | jsonify }},
+  "image": "{{ og_image }}",
+  "sku": "{{ page.title | slugify }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ site.title }}"
+  },
+  "manufacturer": {
+    "@type": "Person",
+    "name": "{{ site.author.name }}"
+  },
+  "material": {{ page.materials | default: "Speckled Stoneware" | jsonify }},
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "Dimensions",
+      "value": {{ page.dimensions | default: "Handmade — dimensions vary" | jsonify }}
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Year",
+      "value": {{ page.year | default: "2024" | jsonify }}
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Art Form",
+      "value": "Wheel-thrown stoneware ceramics"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ page.etsy_url | default: site.author.social.etsy }}",
+    "priceCurrency": "USD",
+    "price": "0",
+    "availability": "https://schema.org/{% if page.sold %}Discontinued{% else %}InStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ site.title }} on Etsy"
+    },
+    "itemCondition": "https://schema.org/NewCondition"
+  },
+  "category": {{ page.category | default: "Pottery" | jsonify }}
+}
+</script>
+{%- endif -%}
+
+{%- if page.layout == 'journal-detail' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ site_description | jsonify }},
+  "image": "{{ og_image }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ site.author.name }}",
+    "@id": "{{ site.url }}/#person"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "@id": "{{ site.url }}/#organization",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}/assets/images/og-default.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page_url }}"
+  }
+}
+</script>
+{%- endif -%}
+
+{%- seo title=false -%}

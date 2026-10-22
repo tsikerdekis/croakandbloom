@@ -1,0 +1,12 @@
+{%- comment -%}
+  lightbox.html — image lightbox markup (behavior in site.js).
+{%- endcomment -%}
+<div class="lightbox" id="lightbox" data-open="false" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox__close" type="button" aria-label="Close image">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="6" y1="6" x2="18" y2="18"/>
+      <line x1="18" y1="6" x2="6" y2="18"/>
+    </svg>
+  </button>
+  <img class="lightbox__img" alt="" />
+</div>

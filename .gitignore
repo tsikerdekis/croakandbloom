@@ -1,7 +1,6 @@
 _site/
 .sass-cache/
 .jekyll-metadata
-Gemfile.lock
 *.gem
 .jekyll-cache
 
@@ -24,3 +23,5 @@ node_modules/
 tmp/
 *.log
 coverage/
+
+.playwright-mcp

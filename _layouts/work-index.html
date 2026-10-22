@@ -1,0 +1,45 @@
+---
+layout: default
+---
+{%- comment -%}
+  work-index.html — all works index with optional category filter.
+{%- endcomment -%}
+
+<header class="page-header">
+  <div class="container">
+    <span class="eyebrow">Portfolio</span>
+    <h1 class="page-header__title mt-4">Work</h1>
+    <p class="page-header__lead mt-4">A selection of recent pieces from the studio. Each is thrown, trimmed, glazed, and fired by hand in small batches.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+
+    {%- assign category_names = site.works | map: "category" | uniq | compact -%}
+    {%- if category_names.size > 1 -%}
+    <div class="filter" role="toolbar" aria-label="Filter by category">
+      <button class="filter__chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      {%- for name in category_names -%}
+        <button class="filter__chip" type="button" data-filter="{{ name | slugify }}" aria-pressed="false">{{ name }}</button>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    <div class="work-grid" id="work-grid">
+      {%- assign works = site.works | sort: "order" -%}
+      {%- for work in works -%}
+        <div class="work-grid__item" data-collection="{{ work.category | slugify }}">
+          {% include work-card.html work=work %}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if works.size == 0 -%}
+    <div class="notice text-center">
+      <p>New work is on the wheel. In the meantime, <a href="{{ site.author.social.etsy }}" rel="noopener" target="_blank">visit the Etsy shop</a> for what's available now.</p>
+    </div>
+    {%- endif -%}
+
+  </div>
+</section>

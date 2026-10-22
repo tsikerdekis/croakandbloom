@@ -1,0 +1,115 @@
+---
+layout: default
+---
+{%- comment -%}
+  work-detail.html — individual piece page.
+{%- endcomment -%}
+
+<article>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="split split--wide">
+
+        <figure class="figure">
+          {%- if page.image -%}
+            <img src="{{ page.image | relative_url }}"
+                 alt="{{ page.alt | default: page.title | escape }}"
+                 width="1600" height="2000"
+                 loading="eager" fetchpriority="high">
+          {%- endif -%}
+        </figure>
+
+        <div>
+          {%- if page.category -%}
+            {%- assign coll_slug = page.category | slugify -%}
+            {%- assign collection_docs = "" | split: "" -%}
+            {%- for coll in site.collections -%}
+              {%- if coll.label == "collections_dir" -%}
+                {%- assign collection_docs = coll.docs -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- assign coll_match = collection_docs | where: "title", page.category | first -%}
+            {%- if coll_match -%}
+              <a class="eyebrow" href="{{ coll_match.url | relative_url }}" style="text-decoration:none;">{{ page.category }}</a>
+            {%- else -%}
+              <a class="eyebrow" href="{{ '/collections/' | append: coll_slug | relative_url }}" style="text-decoration:none;">{{ page.category }}</a>
+            {%- endif -%}
+          {%- endif -%}
+          <h1 class="mt-4" style="font-size:clamp(2rem, 1.5rem + 2vw, 3.5rem);">{{ page.title }}</h1>
+
+          {%- if page.statement -%}
+            <div class="lead mt-6">{{ page.statement }}</div>
+          {%- endif -%}
+
+          <dl class="mt-8" style="display:grid;grid-template-columns:auto 1fr;gap:1rem 2rem;font-size:var(--fs-sm);">
+            {%- if page.materials and page.materials != "" -%}
+              <dt class="eyebrow" style="color:var(--fg-muted);">Materials</dt>
+              <dd>{{ page.materials }}</dd>
+            {%- endif -%}
+            {%- if page.dimensions and page.dimensions != "" -%}
+              <dt class="eyebrow" style="color:var(--fg-muted);">Dimensions</dt>
+              <dd>{{ page.dimensions }}</dd>
+            {%- endif -%}
+            {%- if page.year and page.year != "" -%}
+              <dt class="eyebrow" style="color:var(--fg-muted);">Year</dt>
+              <dd>{{ page.year }}</dd>
+            {%- endif -%}
+            {%- if page.sold -%}
+              <dt class="eyebrow" style="color:var(--fg-muted);">Status</dt>
+              <dd>Sold — inquire for similar work</dd>
+            {%- endif -%}
+          </dl>
+
+          <div class="btn-group mt-8">
+            {%- if page.etsy_url -%}
+              <a class="btn btn--accent" href="{{ page.etsy_url }}" rel="noopener noreferrer" target="_blank">View on Etsy</a>
+            {%- else -%}
+              <a class="btn btn--accent" href="{{ site.author.social.etsy }}" rel="noopener noreferrer" target="_blank">Shop on Etsy</a>
+            {%- endif -%}
+            <a class="btn" href="{{ '/contact/' | relative_url }}">Inquire</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {%- assign gallery = page.gallery -%}
+  {%- if gallery and gallery.size > 0 -%}
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Details</span>
+        <h2>From every angle</h2>
+      </div>
+      <div class="grid grid-3">
+        {%- for img in gallery -%}
+          <figure class="figure">
+            <img src="{{ img | relative_url }}" alt="{{ page.title | escape }} — detail {{ forloop.index }}" loading="lazy" width="800" height="1000">
+          </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} Related works (other items in same collection) {%- endcomment -%}
+  {%- assign related = site.works | where: "category", page.category | where_exp: "item", "item.title != page.title" | slice: 0, 3 -%}
+  {%- if related.size > 0 -%}
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">More from this collection</span>
+        <h2>You might also like</h2>
+      </div>
+      <div class="work-grid">
+        {%- for work in related -%}
+          {% include work-card.html work=work %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+</article>

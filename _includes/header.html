@@ -1,30 +1,45 @@
-<!-- Wrapper -->
-<div id="wrapper">
+{%- comment -%}
+  header.html — sticky site header with primary nav + mobile drawer.
+{%- endcomment -%}
+<header class="site-header" role="banner">
+  <div class="container site-header__inner">
+    <a href="{{ '/' | relative_url }}" class="brand" aria-label="{{ site.title }} — home">
+      <svg class="brand__mark" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M7 2C7 2 5 6 5 10C5 14 7 16 7 20C7 24 5 28 5 28H19C19 28 17 24 17 20C17 16 19 14 19 10C19 6 17 2 17 2H7Z" fill="currentColor"/>
+        <ellipse cx="12" cy="2" rx="5" ry="1.5" fill="var(--bg)"/>
+      </svg>
+      <span class="brand__wordmark">{{ site.title }}</span>
+      <span class="brand__tag">{{ site.tagline }}</span>
+    </a>
 
-<!-- Header -->
-<header id="header"{% if page.layout == "landing" %} class="alt style2"{% endif %}{% if page.layout == "home" %} class="alt"{% endif %}>
-	<a href="{{ "" | absolute_url }}/" class="logo"><strong>{{ site.title }}</strong> <span>{{ site.subtitle }}</span></a>
-	<nav>
-		<a href="#menu">Menu</a>
-	</nav>
+    <nav class="nav" aria-label="Primary">
+      {%- assign nav_items = "Work|/work/,Collections|/collections/,About|/about/,Process|/process/,Contact|/contact/" | split: "," -%}
+      {%- for item in nav_items -%}
+        {%- assign parts  = item | split: "|" -%}
+        {%- assign label  = parts[0] -%}
+        {%- assign href   = parts[1] -%}
+        {%- assign active = false -%}
+        {%- if page.url == href or page.url contains href -%}{%- assign active = true -%}{%- endif -%}
+        <a href="{{ href | relative_url }}" {% if active %}aria-current="page"{% endif %}>{{ label }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <a class="btn btn--accent header-cta" href="{{ site.author.social.etsy }}" rel="noopener noreferrer" target="_blank">Shop on Etsy</a>
+
+    <button class="nav-toggle" type="button"
+            aria-controls="mobile-nav" aria-expanded="false"
+            aria-label="Open navigation menu">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
+  </div>
 </header>
 
-<!-- Menu -->
-<nav id="menu">
-	<ul class="links">
-        {% for page in site.pages %}
-		    {% if page.layout == "home" %}
-		        <li><a href="{{ "" | absolute_url }}/">{{ page.title }}</a></li>
-	    	{% endif %}
-		{% endfor %}
-		{% for page in site.html_pages %}
-		    {% if page.layout != "home" and page.nav-menu == true %}
-		        <li><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></li>
-		    {% endif %}
-		{% endfor %}
-	</ul>
-	<ul class="actions vertical">
-		<li><a href="#" class="button special fit">Get Started</a></li>
-		<li><a href="#" class="button fit">Log In</a></li>
-	</ul>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" data-open="false">
+  <ul role="list">
+    {%- for item in nav_items -%}
+      {%- assign parts = item | split: "|" -%}
+      <li><a href="{{ parts[1] | relative_url }}">{{ parts[0] }}</a></li>
+    {%- endfor -%}
+  </ul>
+  <a class="btn btn--accent btn--block" href="{{ site.author.social.etsy }}" rel="noopener noreferrer" target="_blank">Shop on Etsy</a>
 </nav>

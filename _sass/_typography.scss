@@ -1,0 +1,135 @@
+// =====================================================================
+// _typography.scss — type scale, headings, links, prose.
+// =====================================================================
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: var(--lh-base);
+  color: var(--fg);
+}
+
+// Display / heading family
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+}
+
+h1, .h1 {
+  font-size: clamp(2.5rem, 1.5rem + 4vw, var(--fs-4xl));
+  font-weight: 500;
+}
+
+h2, .h2 {
+  font-size: clamp(2rem, 1.2rem + 3vw, var(--fs-3xl));
+  font-weight: 500;
+}
+
+h3, .h3 {
+  font-size: clamp(1.5rem, 1rem + 2vw, var(--fs-2xl));
+  font-weight: 500;
+}
+
+h4, .h4 {
+  font-size: var(--fs-xl);
+  font-weight: 500;
+}
+
+h5, .h5 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+h6, .h6 {
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+
+p { max-width: var(--measure); }
+
+strong, b { font-weight: 600; color: var(--ink); }
+
+em, i { font-style: italic; }
+
+small, .small {
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+}
+
+// Eyebrow / label style — uppercase, letter-spaced
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--accent);
+}
+
+// Lead paragraph
+.lead {
+  font-size: var(--fs-md);
+  line-height: var(--lh-loose);
+  color: var(--fg);
+  max-width: 36rem;
+}
+
+// Drop cap utility
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.5em;
+  float: left;
+  line-height: 0.85;
+  padding: 0.05em 0.1em 0 0;
+  color: var(--accent);
+}
+
+// Links
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover { color: var(--link-hover); }
+
+a.unstyled,
+a.unstyled:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Pull quote
+blockquote,
+.pull-quote {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  font-style: italic;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--space-5);
+  margin: var(--space-6) 0;
+}
+
+// Lists
+ul, ol { padding-left: 1.25em; }
+ul[role="list"], ol[role="list"] { padding-left: 0; list-style: none; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-7) 0;
+}
+
+// Code
+code, kbd, pre, samp { font-family: var(--font-mono); font-size: 0.9em; }
+pre { padding: var(--space-4); background: var(--bg-alt); border-radius: var(--radius); overflow-x: auto; }

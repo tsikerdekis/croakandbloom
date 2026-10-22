@@ -1,55 +1,80 @@
-<!DOCTYPE html>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+---
+layout: default
+---
+{%- comment -%}
+  home.html — homepage: hero, intro, featured works, process preview, contact CTA.
+{%- endcomment -%}
 
-{% include head.html %}
-
-<body>
-
-    {% include header.html %}
-
-    <!-- Banner -->
-    <section id="banner" class="major">
-        <div class="inner">
-            <header class="major">
-                <h1>{{ page.landing-title }}</h1>
-            </header>
-            <div class="content">
-                <p style="text-transform: uppercase;">{{ site.description }}</p>
-                <ul class="actions">
-                    <li><a href="https://www.etsy.com/shop/CroakandBloom" class="button next scrolly">Visit my Etsy Shop</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main -->
-    <div id="main">
-
-        <!-- One -->
-        {% include tiles.html %}
-
-        <!-- Two -->
-        <section id="two">
-            <div class="inner">
-                <header class="major">
-                    <h2>History</h2>
-                </header>
-                <p>{{ content }}</p>
-                <ul class="actions">
-                    <li><a href="landing.html" class="button next">Get Started</a></li>
-                </ul>
-            </div>
-        </section>
-
+<section class="hero">
+  {%- if page.image -%}
+    <div class="hero__media">
+      <img src="{{ page.image | relative_url }}" alt="" width="2400" height="1600" loading="eager" fetchpriority="high">
     </div>
+  {%- else -%}
+    <div class="hero__media">
+      <img src="{{ '/assets/images/banner.jpg' | relative_url }}" alt="" width="2400" height="1600" loading="eager" fetchpriority="high">
+    </div>
+  {%- endif -%}
 
-    {% include footer.html %}
+  <div class="hero__content">
+    <span class="eyebrow">Handmade in Bellingham, WA</span>
+    <h1 class="hero__title">{{ page.hero-title | default: site.title }}</h1>
+    <p class="hero__sub">{{ page.hero-sub | default: "Small-batch stoneware, thrown and glazed by hand." }}</p>
+    <div class="btn-group" style="justify-content:center;">
+      <a class="btn btn--accent" href="{{ site.author.social.etsy }}" rel="noopener" target="_blank">Shop the Collection</a>
+      <a class="btn" href="{{ '/work/' | relative_url }}">View Work</a>
+    </div>
+  </div>
+</section>
 
-</body>
+<section class="section">
+  <div class="container">
+    <div class="prose text-center" style="margin-inline:auto;">
+      <span class="eyebrow">Studio Note</span>
+      <h2 class="mt-4">Quiet objects, made by hand.</h2>
+      <p class="lead" style="margin:1.5rem auto 0;">{{ page.description | default: site.description | strip_html }}</p>
+      <p class="mt-4" style="font-size:var(--fs-sm);color:var(--fg-muted);">As featured in <strong>BuzzFeed</strong>, <strong>The Seattle Times</strong>, and <strong>Washington Wedding Day Magazine</strong>.</p>
+    </div>
+  </div>
+</section>
 
-</html>
+{%- assign featured = site.works | where: "featured", true | sort: "order" -%}
+{%- if featured.size == 0 -%}{%- assign featured = site.works | sort: "order" | slice: 0, 6 -%}{%- endif -%}
+
+{%- if featured.size > 0 -%}
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Featured Work</span>
+      <h2>Pieces from the studio</h2>
+    </div>
+    <div class="work-grid">
+      {%- for work in featured limit:6 -%}
+        {% include work-card.html work=work %}
+      {%- endfor -%}
+    </div>
+    <div class="text-center mt-8">
+      <a class="btn btn--link" href="{{ '/work/' | relative_url }}">See all work</a>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+<section class="section section--ink">
+  <div class="container">
+    <div class="split split--narrow">
+      <div>
+        <span class="eyebrow" style="color:var(--accent-soft);">Custom &amp; Wholesale</span>
+        <h2 class="mt-4">Made for your table, your shop, or your wedding.</h2>
+        <p class="mt-4">Custom branded mugs for cafés, wedding favors, restaurant tableware, and small-batch wholesale. Each piece is thrown, trimmed, glazed, and fired by hand in our Bellingham studio.</p>
+        <div class="btn-group mt-6">
+          <a class="btn btn--solid" style="background:#fff;color:var(--ink);border-color:#fff;" href="{{ '/contact/' | relative_url }}">Start a Project</a>
+          <a class="btn" style="color:#fff;border-color:rgba(255,255,255,.4);" href="{{ '/process/' | relative_url }}">See the Process</a>
+        </div>
+      </div>
+      <div class="figure">
+        <img src="{{ '/assets/images/pic10.jpg' | relative_url }}" alt="Close-up of speckled stoneware with brilliant blue glaze details" loading="lazy" width="1200" height="900">
+      </div>
+    </div>
+  </div>
+</section>

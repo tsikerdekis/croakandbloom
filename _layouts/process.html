@@ -1,0 +1,50 @@
+---
+layout: default
+---
+{%- comment -%}
+  process.html — step-by-step process page with images.
+{%- endcomment -%}
+
+<header class="page-header">
+  <div class="container">
+    <span class="eyebrow">{{ page.eyebrow | default: site.title }}</span>
+    <h1 class="page-header__title mt-4">{{ page.title }}</h1>
+    {%- if page.description -%}
+      <p class="page-header__lead mt-4">{{ page.description }}</p>
+    {%- endif -%}
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <p class="lead text-center" style="max-width:40rem;margin-inline:auto;margin-bottom:var(--space-8);">{{ page.intro | default: "Each piece from Croak and Bloom is the product of seven quiet steps." }}</p>
+
+    <div class="steps">
+      {%- for step in page.steps -%}
+      <article class="step">
+        {%- if step.image -%}
+        <div class="step__media">
+          <img src="{{ step.image | relative_url }}" alt="{{ step.alt | default: step.title | escape }}" loading="lazy" width="800" height="600">
+        </div>
+        {%- endif -%}
+        <div class="step__body">
+          <span class="step__num"></span>
+          <h2 class="step__title">{{ step.title }}</h2>
+          <p>{{ step.description }}</p>
+        </div>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" style="text-align:center;">
+  <div class="container">
+    <h2>Want to see a piece come to life?</h2>
+    <p class="lead mt-4" style="max-width:32rem;margin-inline:auto;">Visit the shop to browse finished work, or get in touch to start a custom project.</p>
+    <div class="btn-group mt-6" style="justify-content:center;">
+      <a class="btn btn--accent" href="{{ site.author.social.etsy }}" rel="noopener" target="_blank">Shop the Collection</a>
+      <a class="btn" href="{{ '/contact/' | relative_url }}">Start a Project</a>
+    </div>
+  </div>
+</section>

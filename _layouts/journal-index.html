@@ -1,0 +1,37 @@
+{%- comment -%}
+  journal-index.html — placeholder scaffold for future journal posts.
+{%- endcomment -%}
+---
+layout: default
+---
+
+<header class="page-header">
+  <div class="container">
+    <span class="eyebrow">Journal</span>
+    <h1 class="page-header__title mt-4">Notes from the studio</h1>
+    <p class="page-header__lead mt-4">Studio updates, new collections, and the occasional reflection on craft and process.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    {%- assign posts = site.journal | sort: "date" | reverse -%}
+    {%- if posts.size == 0 -%}
+      <div class="notice text-center">
+        <p>No notes yet — the journal is brand new. In the meantime, <a href="{{ '/work/' | relative_url }}">browse the work</a> or <a href="{{ '/contact/' | relative_url }}">say hello</a>.</p>
+      </div>
+    {%- else -%}
+      <ul role="list" class="grid" style="gap:var(--space-6);">
+        {%- for post in posts -%}
+        <li class="card">
+          <div class="card__body">
+            <span class="eyebrow">{{ post.date | date: "%B %-d, %Y" }}</span>
+            <h2 class="mt-4" style="font-family:var(--font-display);font-size:var(--fs-xl);"><a href="{{ post.url | relative_url }}" style="color:inherit;text-decoration:none;">{{ post.title }}</a></h2>
+            {%- if post.description -%}<p class="mt-2 muted">{{ post.description }}</p>{%- endif -%}
+          </div>
+        </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
