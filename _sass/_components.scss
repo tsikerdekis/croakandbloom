@@ -361,11 +361,15 @@
 
 .brand__mark {
   display: inline-block;
-  width: 1.125rem;
-  height: 1.5rem;
-  color: var(--accent);
+  width: 2rem;
+  height: 2rem;
   flex-shrink: 0;
   align-self: center;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .brand__mark { width: 2.25rem; height: 2.25rem; }
 }
 
 .brand__wordmark {
@@ -381,9 +385,13 @@
   letter-spacing: var(--ls-label);
   color: var(--fg-muted);
   display: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* The tagline only has room while the desktop nav is still hidden; showing
+     it alongside the nav and CTA overflows the container. */
   .brand__tag { display: inline; }
 }
 
