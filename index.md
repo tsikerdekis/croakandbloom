@@ -7,4 +7,5 @@ description: >-
   artist Anna Poupa.
 permalink: /
 image: /assets/images/banner.jpg
+hero-sub: Handbuilt, wheel thrown and glazed by human hands.
 ---
