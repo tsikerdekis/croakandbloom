@@ -248,6 +248,10 @@
   font-style: italic;
   color: var(--ink);
   margin-bottom: var(--space-6);
+  /* The global p{max-width:var(--measure)} caps this line at 66ch, which is a
+     few px short of the full subtitle, orphaning its last word. Balance the
+     break so the two lines read evenly instead of leaving a single word. */
+  text-wrap: balance;
 }
 
 // Page header
