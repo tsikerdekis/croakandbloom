@@ -243,15 +243,31 @@
 }
 
 .hero__sub {
-  font-size: var(--fs-md);
+  /* 2pt larger than the base --fs-md step, as requested. */
+  font-size: calc(var(--fs-md) + 2pt);
   font-family: var(--font-display);
   font-style: italic;
   color: var(--ink);
   margin-bottom: var(--space-6);
+  /* White halo so the italic line stays readable over the hero photograph.
+     Four offset copies draw a crisp outline; the blurred pair softens it. */
+  text-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.95),
+     1px -1px 0 rgba(255, 255, 255, 0.95),
+    -1px  1px 0 rgba(255, 255, 255, 0.95),
+     1px  1px 0 rgba(255, 255, 255, 0.95),
+     0 0 8px rgba(255, 255, 255, 0.85);
   /* The global p{max-width:var(--measure)} caps this line at 66ch, which is a
      few px short of the full subtitle, orphaning its last word. Balance the
      break so the two lines read evenly instead of leaving a single word. */
   text-wrap: balance;
+}
+
+/* Hero eyebrow only — the same component elsewhere is unaffected. */
+.hero__content .eyebrow {
+  position: relative;
+  top: -20px;
+  text-shadow: 0 1px 3px rgba(26, 23, 20, 0.28);
 }
 
 // Page header

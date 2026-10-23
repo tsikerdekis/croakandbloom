@@ -6,10 +6,16 @@
 
 @font-face {
   font-family: "Breathing";
-  src: url("/assets/fonts/Breathing.ttf") format("truetype");
+  /* Subset to basic Latin + punctuation: 649 KB TTF -> 171 KB WOFF2, which
+     is small enough to arrive before first paint alongside the preload in
+     head.html. Only the hero title and header wordmark use this face. */
+  src: url("/assets/fonts/Breathing-subset.woff2") format("woff2"),
+       url("/assets/fonts/Breathing.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  /* block, not swap: never paint the fallback face and then swap, which is
+     the visible flash this font used to cause. */
+  font-display: block;
 }
 
 @import "tokens";
