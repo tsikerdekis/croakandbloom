@@ -9,6 +9,7 @@ intro: Each piece from Croak and Bloom is the product of seven quiet steps. Ther
 steps:
   - title: Wedging
     image: /assets/images/process-01-wedging.jpg
+    anim: /assets/images/process-01-wedging.webp
     alt: Hands pressing and folding a ball of clay on the workbench to work out air bubbles
     description: Before a single piece is thrown, the stoneware clay is wedged by hand to remove air bubbles and bring the moisture to a uniform consistency. It is meditative, physical work, and it is the first quiet conversation with the material.
 
@@ -19,6 +20,7 @@ steps:
 
   - title: Trimming
     image: /assets/images/process-03-trimming.jpg
+    anim: /assets/images/process-03-trimming.webp
     alt: An inverted leather-hard pot on the wheel, showing the stamped C&B frog mark on its foot
     description: After the piece stiffens to leather-hard, it is inverted and trimmed on the wheel. Excess clay is removed from the foot, the wall is refined, and a small C&B inscription is stamped into the base.
 
