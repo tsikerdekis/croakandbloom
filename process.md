@@ -9,22 +9,22 @@ intro: Each piece from Croak and Bloom is the product of seven quiet steps. Ther
 steps:
   - title: Wedging
     image: /assets/images/process-01-wedging.jpg
-    alt: Hands working clay at the pottery wheel
+    alt: Hands pressing and folding a ball of clay on the workbench to work out air bubbles
     description: Before a single piece is thrown, the stoneware clay is wedged by hand to remove air bubbles and bring the moisture to a uniform consistency. It is meditative, physical work, and it is the first quiet conversation with the material.
 
   - title: Throwing
     image: /assets/images/process-02-throwing.jpg
-    alt: Clay being centered and pulled up on the pottery wheel
+    alt: Anna at the pottery wheel, holding a ball of clay in each hand before centering it
     description: Forms are centered on the wheel and pulled up from a single ball of clay. Mugs, bowls, vases, the shapes you see in the finished work are decided in these few minutes, mostly by feel.
 
   - title: Trimming
     image: /assets/images/process-03-trimming.jpg
-    alt: A freshly trimmed ceramic piece on the wheel
+    alt: An inverted leather-hard pot on the wheel, showing the stamped C&B frog mark on its foot
     description: After the piece stiffens to leather-hard, it is inverted and trimmed on the wheel. Excess clay is removed from the foot, the wall is refined, and a small C&B inscription is stamped into the base.
 
   - title: Drying
     image: /assets/images/process-04-drying.jpg
-    alt: Small wheel-thrown pots drying on the workbench
+    alt: Unfired wheel-thrown bowls and cups drying on a board in the studio
     description: Pieces dry slowly under cloth for several days, then uncovered, until they reach bone-dry. Rushing this step invites cracking. Patience is a material.
 
   - title: Glazing
