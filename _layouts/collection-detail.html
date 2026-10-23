@@ -46,4 +46,12 @@ layout: default
     </div>
   </div>
 </section>
+{%- else -%}
+<section class="section">
+  <div class="container">
+    <div class="notice text-center">
+      <p>New work for this collection is on the wheel. In the meantime, <a href="{{ site.author.social.etsy }}" rel="noopener noreferrer" target="_blank">see what's available on Etsy</a> or <a href="{{ '/contact/' | relative_url }}">get in touch</a> about a custom piece.</p>
+    </div>
+  </div>
+</section>
 {%- endif -%}

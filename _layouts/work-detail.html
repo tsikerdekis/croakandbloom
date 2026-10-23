@@ -33,7 +33,12 @@ layout: default
             {%- if coll_match -%}
               <a class="eyebrow" href="{{ coll_match.url | relative_url }}" style="text-decoration:none;">{{ page.category }}</a>
             {%- else -%}
-              <a class="eyebrow" href="{{ '/collections/' | append: coll_slug | relative_url }}" style="text-decoration:none;">{{ page.category }}</a>
+              {%- comment -%}
+                No matching collection page (e.g. "Studio" pieces, which are
+                process photos rather than a catalogue line). Render a plain
+                label instead of linking to a page that does not exist.
+              {%- endcomment -%}
+              <span class="eyebrow">{{ page.category }}</span>
             {%- endif -%}
           {%- endif -%}
           <h1 class="mt-4" style="font-size:clamp(2rem, 1.5rem + 2vw, 3.5rem);">{{ page.title }}</h1>
