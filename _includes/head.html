@@ -2,7 +2,24 @@
   head.html — site head, meta, OG, Twitter, JSON-LD, fonts.
 {%- endcomment -%}
 {%- assign site_title       = page.title | default: site.title | escape -%}
-{%- assign site_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
+{%- comment -%}
+  Description fallback chain. Work and collection pages have no description in
+  front matter, so build one from their own fields rather than leaving the tag
+  empty (18 pages were shipping an empty description before this).
+{%- endcomment -%}
+{%- if page.description -%}
+  {%- assign site_description = page.description -%}
+{%- elsif page.layout == 'work-detail' -%}
+  {%- assign site_description = page.title | append: ', handmade ' | append: page.category | append: ' in ' | append: page.materials | append: '. Made in small batches in Bellingham, Washington.' -%}
+{%- elsif page.layout == 'collection-detail' -%}
+  {%- assign coll_count = site.works | where: "category", page.title | size -%}
+  {%- assign site_description = page.summary | append: ' Shop the ' | append: page.title | append: ' collection from Croak and Bloom, handmade in Bellingham, Washington.' -%}
+{%- elsif page.excerpt -%}
+  {%- assign site_description = page.excerpt -%}
+{%- else -%}
+  {%- assign site_description = site.description -%}
+{%- endif -%}
+{%- assign site_description = site_description | strip_html | normalize_whitespace | truncate: 160 -%}
 {%- assign page_url         = page.url | absolute_url -%}
 {%- assign og_image_path    = page.image | default: '/assets/images/og-default.jpg' -%}
 {%- assign og_image         = og_image_path | absolute_url -%}
@@ -13,7 +30,9 @@
 <meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=no">
 <meta name="author" content="{{ site.author.name }}">
-{%- if page.layout == 'work-detail' or page.layout == 'collection-detail' or page.layout == 'journal-detail' -%}
+{%- if page.robots == 'noindex' -%}
+  <meta name="robots" content="noindex, follow">
+{%- elsif page.layout == 'work-detail' or page.layout == 'collection-detail' or page.layout == 'journal-detail' -%}
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 {%- else -%}
   <meta name="robots" content="index, follow">
@@ -35,9 +54,28 @@
 <meta property="og:title"       content="{{ site_title }}">
 <meta property="og:description" content="{{ site_description }}">
 <meta property="og:url"         content="{{ page_url }}">
+{%- comment -%}
+  og:image dimensions used to be hardcoded 1200x630, which was wrong for work
+  pages (1200x1200) and the homepage banner (2400x1600). Derive them per page.
+{%- endcomment -%}
+{%- if page.layout == 'work-detail' or page.layout == 'collection-detail' -%}
+  {%- assign og_w = 1200 -%}{%- assign og_h = 1200 -%}
+{%- elsif page.image -%}
+  {%- assign og_w = 2400 -%}{%- assign og_h = 1600 -%}
+{%- else -%}
+  {%- assign og_w = 1200 -%}{%- assign og_h = 630 -%}
+{%- endif -%}
 <meta property="og:image"       content="{{ og_image }}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="{{ og_w }}">
+<meta property="og:image:height" content="{{ og_h }}">
+{%- if page.alt -%}
+  {%- assign og_alt = page.alt -%}
+{%- elsif page.url == '/' -%}
+  {%- assign og_alt = site.title | append: ', handmade pottery in Bellingham, Washington' -%}
+{%- else -%}
+  {%- assign og_alt = page.title | default: site.title -%}
+{%- endif -%}
+<meta property="og:image:alt"   content="{{ og_alt | escape }}">
 <meta property="og:locale"      content="en_US">
 
 <!-- Twitter -->
@@ -94,7 +132,12 @@
       "@id": "{{ site.url }}/#organization",
       "name": "{{ site.title }}",
       "url": "{{ site.url }}",
-      "logo": "{{ site.url }}/assets/images/og-default.jpg",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/assets/images/logo-mark.png",
+        "width": 256,
+        "height": 256
+      },
       "description": "{{ site.description | strip_newlines | escape }}",
       "foundingDate": "2018",
       "founder": { "@id": "{{ site.url }}/#person" },
@@ -173,6 +216,16 @@
             "@type": "OfferCatalog",
             "name": "Kitchen & Giftware",
             "url": "{{ site.url }}/collections/kitchen-giftware/"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Collaborations",
+            "url": "{{ site.url }}/collections/collaborations/"
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Custom & Wholesale",
+            "url": "{{ site.url }}/collections/custom-wholesale/"
           }
         ]
       },
@@ -202,18 +255,37 @@
       "name": "{{ site.title }}",
       "description": "{{ site.description | strip_newlines | escape }}",
       "publisher": { "@id": "{{ site.url }}/#organization" },
-      "inLanguage": "en-US",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "{{ site.url }}/work/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "inLanguage": "en-US"
     }
   ]
 }
 </script>
 
-{%- comment -%} BreadcrumbList JSON-LD {%- endcomment -%}
+{%- comment -%}
+  BreadcrumbList JSON-LD {%- endcomment -%}
+{%- comment -%}
+  Build the trail from page.url segments, but resolve each segment to a real
+  page instead of guessing a URL. The previous version emitted links like
+  /01-speckled-mug-pastel-pink/ and /mugs/, both of which 404.
+{%- endcomment -%}
+{%- assign trail_titles = "" | split: "" -%}
+{%- assign trail_urls   = "" | split: "" -%}
+{%- assign walk = "" -%}
+{%- assign url_parts = page.url | split: '/' -%}
+{%- for part in url_parts -%}
+  {%- unless part == "" -%}
+    {%- assign walk = walk | append: '/' | append: part -%}
+    {%- assign withslash = walk | append: '/' -%}
+    {%- assign crumb_doc = site.pages | where: "url", withslash | first -%}
+    {%- if crumb_doc == nil -%}
+      {%- assign crumb_doc = site.collections_dir | where: "url", withslash | first -%}
+    {%- endif -%}
+    {%- if crumb_doc -%}
+      {%- assign trail_titles = trail_titles | push: crumb_doc.title -%}
+      {%- assign trail_urls   = trail_urls   | push: withslash -%}
+    {%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -225,25 +297,17 @@
       "name": "Home",
       "item": "{{ site.url }}/"
     }
-    {%- assign crumbs = page.url | replace: '/', ' ' | strip | split: ' ' | compact -%}
-    {%- if crumbs.size > 0 -%}
-      {%- for crumb in crumbs limit:crumbs.size -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ forloop.index | plus: 1 }},
-          "name": "{{ crumb | capitalize }}",
-          "item": "{{ site.url }}/{{ crumb }}/"
-        }
-      {%- endfor -%}
-    {%- endif -%}
-    {%- if page.title and page.url != '/' -%}
+    {%- assign pos = 1 -%}
+    {%- for t in trail_titles -%}
+      {%- assign pos = pos | plus: 1 -%}
+      {%- assign idx = forloop.index0 -%}
       ,{
         "@type": "ListItem",
-        "position": {{ crumbs.size | plus: 2 }},
-        "name": "{{ page.title | escape }}",
-        "item": "{{ page_url }}"
+        "position": {{ pos }},
+        "name": {{ t | jsonify }},
+        "item": {{ trail_urls[idx] | absolute_url | jsonify }}
       }
-    {%- endif -%}
+    {%- endfor -%}
   ]
 }
 </script>
@@ -254,8 +318,14 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": {{ page.title | jsonify }},
-  "description": {{ page.description | default: page.excerpt | default: site_description | jsonify }},
-  "image": "{{ og_image }}",
+  "description": {{ site_description | jsonify }},
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ og_image }}",
+    "width": 1200,
+    "height": 1200
+  },
+  "url": {{ page_url | jsonify }},
   "sku": "{{ page.title | slugify }}",
   "brand": {
     "@type": "Brand",
@@ -285,15 +355,17 @@
   ],
   "offers": {
     "@type": "Offer",
-    "url": "{{ page.etsy_url | default: site.author.social.etsy }}",
-    "priceCurrency": "USD",
-    "price": "0",
+    "url": {{ page.etsy_url | default: site.author.social.etsy | jsonify }},
     "availability": "https://schema.org/{% if page.sold %}Discontinued{% else %}InStock{% endif %}",
     "seller": {
       "@type": "Organization",
       "name": "{{ site.title }} on Etsy"
     },
     "itemCondition": "https://schema.org/NewCondition"
+    {%- if page.price -%}
+    ,"priceCurrency": "USD",
+    "price": {{ page.price | jsonify }}
+    {%- endif -%}
   },
   "category": {{ page.category | default: "Pottery" | jsonify }}
 }
@@ -331,5 +403,3 @@
 }
 </script>
 {%- endif -%}
-
-{%- seo title=false -%}
