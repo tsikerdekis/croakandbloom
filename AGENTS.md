@@ -177,5 +177,11 @@ SASS is compiled and minified (`style: compressed`) by the Jekyll plugin. No sep
 - Use `relative_url` filter for all asset/permalink paths
 - Keep inline styles minimal; prefer utility classes or `_sass/_components.scss`
 - Image filenames follow `picXX.jpg` pattern for photos, `process-XX-name.jpg` for process steps
-- Add `alt` text to all images — required for both accessibility and SEO
+- Add `alt` text to all images; required for both accessibility and SEO
 - Exclude development files in `_config.yml` `exclude` list before deploying
+
+## Copywriting
+
+- **No mid-sentence em dashes (—) in user-facing copy.** Use a comma, or split
+  into two sentences. En dashes in ranges (`2400–1600`, `4 × 3.5 in`) and em dashes
+  inside code comments are fine.

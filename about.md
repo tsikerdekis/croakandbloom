@@ -16,18 +16,18 @@ What began as making unique ceramic pieces for friends and family has grown into
 
 ## The Practice
 
-Every piece is made by hand in Anna's home studio. She works primarily with speckled stoneware clay, throwing forms on the wheel and finishing them with satin matte glazes in earthy, muted tones. The result is pottery that feels both modern and timeless — objects meant to be used and loved every day.
+Every piece is made by hand in Anna's home studio. She works primarily with speckled stoneware clay, throwing forms on the wheel and finishing them with satin matte glazes in earthy, muted tones. The result is pottery that feels both modern and timeless, objects meant to be used and loved every day.
 
 ## Values
 
-- **Small-batch production** — quality over quantity, always.
-- **Sustainability** — sourcing materials responsibly and minimizing waste.
-- **Community** — partnering with local makers and supporting fellow small businesses.
-- **Functionality** — beautiful objects should also be useful.
+- **Small-batch production:** quality over quantity, always.
+- **Sustainability:** sourcing materials responsibly and minimizing waste.
+- **Community:** partnering with local makers and supporting fellow small businesses.
+- **Functionality:** beautiful objects should also be useful.
 
 ## Press & Collaborations
 
-Croak and Bloom has been featured in BuzzFeed, The Seattle Times, and Washington Wedding Day Magazine, and has partnered with local designers on collections including **The Artisan Collection** with Humble Bouquet — pairing locally-grown flower arrangements with handmade pottery for Mother's Day and weddings.
+Croak and Bloom has been featured in BuzzFeed, The Seattle Times, and Washington Wedding Day Magazine, and has partnered with local designers on collections including **The Artisan Collection** with Humble Bouquet, pairing locally-grown flower arrangements with handmade pottery for Mother's Day and weddings.
 
 ## Get in Touch
 

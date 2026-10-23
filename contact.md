@@ -49,9 +49,9 @@ We'd love to hear from you. For custom orders, wholesale inquiries, collaboratio
 
 Croak and Bloom welcomes wholesale inquiries, custom orders, and creative collaborations. Whether you're a retailer, restaurant, event planner, or fellow maker, we'd love to work with you.
 
-- **Wholesale pottery** — mugs, bowls, vases, and giftware for retail shops and boutiques.
-- **Custom pieces** — branded mugs for cafés, wedding favors, corporate gifts, and more.
-- **Collaborations** — partnering with local florists, designers, and makers on special collections.
+- **Wholesale pottery:** mugs, bowls, vases, and giftware for retail shops and boutiques.
+- **Custom pieces:** branded mugs for cafés, wedding favors, corporate gifts, and more.
+- **Collaborations:** partnering with local florists, designers, and makers on special collections.
 
 Past collaborations include **The Artisan Collection** with Humble Bouquet and custom tableware for local restaurants and cafés.
 

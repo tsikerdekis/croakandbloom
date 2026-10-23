@@ -1,9 +1,9 @@
-{%- comment -%}
-  journal-index.html — placeholder scaffold for future journal posts.
-{%- endcomment -%}
 ---
 layout: default
 ---
+{%- comment -%}
+  journal-index.html — placeholder scaffold for future journal posts.
+{%- endcomment -%}
 
 <header class="page-header">
   <div class="container">
@@ -18,7 +18,7 @@ layout: default
     {%- assign posts = site.journal | sort: "date" | reverse -%}
     {%- if posts.size == 0 -%}
       <div class="notice text-center">
-        <p>No notes yet — the journal is brand new. In the meantime, <a href="{{ '/work/' | relative_url }}">browse the work</a> or <a href="{{ '/contact/' | relative_url }}">say hello</a>.</p>
+          <p>No notes yet. The journal is brand new. In the meantime, <a href="{{ '/work/' | relative_url }}">browse the work</a> or <a href="{{ '/contact/' | relative_url }}">say hello</a>.</p>
       </div>
     {%- else -%}
       <ul role="list" class="grid" style="gap:var(--space-6);">
