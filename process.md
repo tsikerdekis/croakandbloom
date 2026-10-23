@@ -26,17 +26,18 @@ steps:
 
   - title: Drying
     image: /assets/images/process-04-drying.jpg
-    alt: Unfired wheel-thrown bowls and cups drying on a board in the studio
+    alt: Freshly thrown bowls and cups drying on a board in the studio
     description: Pieces dry slowly under cloth for several days, then uncovered, until they reach bone-dry. Rushing this step invites cracking. Patience is a material.
 
   - title: Glazing
     image: /assets/images/process-05-glazing.jpg
-    alt: Hand-carved stoneware hearts with brilliant blue glaze
+    anim: /assets/images/process-05-glazing.webp
+    alt: Hands brushing white glaze onto a small hand-built ceramic spoon
     description: Each piece is hand-dipped or brushed with one of our satin matte glazes in soft pinks, mint, lavender, sun-yellow, and quiet neutrals. Glaze is a chemistry of silica, clay, and mineral oxides, mixed in small batches in the studio.
 
   - title: Firing
     image: /assets/images/process-06-firing.jpg
-    alt: A cone-6 kiln firing glowing orange-hot
+    alt: An open kiln showing a shelf of freshly fired glazed mugs in pink, mint, and grey
     description: The kiln runs to cone 6, about 2232°F, over a fourteen-hour cycle. Each firing is loaded and unloaded by hand, and the cooling takes another full day. A piece in the kiln is a piece in suspension.
 
   - title: Finishing
