@@ -13,7 +13,7 @@ layout: default
 
         <figure class="figure">
           {%- if page.image -%}
-            <img src="{{ page.image | relative_url }}"
+            <img src="{{ page.image | relative_url }}?v={{ site.time | date: '%s' }}"
                  alt="{{ page.alt | default: page.title | escape }}"
                  width="1600" height="2000"
                  loading="eager" fetchpriority="high">

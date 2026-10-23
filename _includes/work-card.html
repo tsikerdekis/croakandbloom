@@ -6,7 +6,7 @@
   <div class="work-card__media">
     {%- if work.image -%}
       <img class="work-card__img"
-           src="{{ work.image | relative_url }}"
+           src="{{ work.image | relative_url }}?v={{ site.time | date: '%s' }}"
            alt="{{ work.alt | default: work.title | escape }}"
            loading="lazy" decoding="async"
            width="800" height="800">

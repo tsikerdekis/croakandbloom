@@ -28,14 +28,16 @@ layout: default
             {%- comment -%}
               Animated WebP with a still JPEG fallback. The media query means
               anyone who has asked for reduced motion gets the still frame and
-              never downloads the animation.
+              never downloads the animation. The ?v= value is the build time,
+              which busts the 4h edge cache whenever the site is redeployed.
             {%- endcomment -%}
+            {%- assign av = site.time | date: '%s' -%}
             <picture>
-              <source srcset="{{ step.anim | relative_url }}" type="image/webp" media="(prefers-reduced-motion: no-preference)">
-              <img src="{{ step.image | relative_url }}" alt="{{ step.alt | default: step.title | escape }}" loading="lazy" width="800" height="600">
+              <source srcset="{{ step.anim | relative_url }}?v={{ av }}" type="image/webp" media="(prefers-reduced-motion: no-preference)">
+              <img src="{{ step.image | relative_url }}?v={{ av }}" alt="{{ step.alt | default: step.title | escape }}" loading="lazy" width="800" height="600">
             </picture>
           {%- else -%}
-            <img src="{{ step.image | relative_url }}" alt="{{ step.alt | default: step.title | escape }}" loading="lazy" width="800" height="600">
+            <img src="{{ step.image | relative_url }}?v={{ site.time | date: '%s' }}" alt="{{ step.alt | default: step.title | escape }}" loading="lazy" width="800" height="600">
           {%- endif -%}
         </div>
         {%- endif -%}
