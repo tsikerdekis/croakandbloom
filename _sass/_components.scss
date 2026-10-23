@@ -267,7 +267,14 @@
 .hero__content .eyebrow {
   position: relative;
   top: -20px;
-  text-shadow: 0 1px 3px rgba(26, 23, 20, 0.28);
+  /* White halo, matching the subtitle, so the small uppercase label
+     separates from the photograph instead of smudging into it. */
+  text-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.95),
+     1px -1px 0 rgba(255, 255, 255, 0.95),
+    -1px  1px 0 rgba(255, 255, 255, 0.95),
+     1px  1px 0 rgba(255, 255, 255, 0.95),
+     0 0 8px rgba(255, 255, 255, 0.85);
 }
 
 // Page header
