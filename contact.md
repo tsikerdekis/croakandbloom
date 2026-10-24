@@ -9,7 +9,11 @@ nav-menu: true
 
 We'd love to hear from you. For custom orders, wholesale inquiries, collaborations, or just a question about a piece, send a note below and we'll get back to you within a few days.
 
-<form class="form" action="https://formspree.io/f/anna@croakandbloom.com" method="POST" aria-label="Contact form">
+<form class="form" action="{{ site.forms.contact_endpoint | default: 'https://formsubmit.co/' | append: site.author.email }}" method="POST" aria-label="Contact form">
+  <input type="hidden" name="_subject" value="New enquiry from croakandbloom.com">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
   <div class="form__row form__row--2">
     <div class="field">
       <label for="name">Your name</label>

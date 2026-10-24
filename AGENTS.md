@@ -37,6 +37,15 @@ Personal portfolio and e-commerce website for **Croak and Bloom**, a small-batch
 | `collections.md` | `collection-index` | — |
 | `process.md` | `process` | `steps[]`, `intro`, `image` |
 | `contact.md` | `page` | `eyebrow` |
+| `thanks.md` | `page` | Post-submit confirmation target |
+
+### Forms
+
+Both forms post to `site.forms.contact_endpoint` in `_config.yml`. Leave it empty
+to use formsubmit.co, which needs no account; the first submission emails a
+confirmation link to `site.author.email` and one click activates delivery.
+Paste a Zoho Forms or Formspree endpoint there to switch provider without
+touching any template.
 
 ### Adding New Content
 

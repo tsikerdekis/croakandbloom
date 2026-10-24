@@ -17,6 +17,14 @@ author:
     linkedin: https://www.linkedin.com/in/anna-poupa-tsikerdekis-b88a345b/
     etsy: https://www.etsy.com/shop/CroakandBloom
 
+# Forms
+# Leave contact_endpoint empty to post to formsubmit.co, which needs no account:
+# the first submission emails a confirmation link to site.author.email, and after
+# that one click every message is delivered. Paste a Zoho Forms or Formspree
+# endpoint here to switch providers without touching the templates.
+forms:
+  contact_endpoint: ""
+
 # Hostname & base
 baseurl: ""
 url: "https://new.croakandbloom.com"

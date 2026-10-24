@@ -9,11 +9,29 @@
         <p class="footer__brand">{{ site.title }}</p>
         <p class="muted-light" style="margin-top:.5rem;max-width:32ch;">{{ site.description | truncate: 140 }}</p>
 
-        <form class="footer__newsletter" action="https://formspree.io/f/{{ site.author.email }}" method="POST" aria-label="Subscribe to the newsletter">
+        {%- comment -%}
+          Newsletter posts to the same endpoint as the contact form, so there is
+          one place to configure. Without an endpoint there is no working form,
+          so fall back to a mailto link rather than a dead POST.
+        {%- endcomment -%}
+        {%- assign fep = site.forms.contact_endpoint -%}
+        {%- if fep and fep != "" -%}
+        <form class="footer__newsletter" action="{{ fep }}" method="POST" aria-label="Subscribe to the newsletter">
+          <input type="hidden" name="_subject" value="Newsletter signup from croakandbloom.com">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <label for="footer-email" class="sr-only">Email address</label>
           <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
           <button type="submit" class="btn btn--small">Join</button>
         </form>
+        {%- else -%}
+        <form class="footer__newsletter" action="https://formsubmit.co/{{ site.author.email }}" method="POST" aria-label="Subscribe to the newsletter">
+          <input type="hidden" name="_subject" value="Newsletter signup from croakandbloom.com">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <label for="footer-email" class="sr-only">Email address</label>
+          <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
+          <button type="submit" class="btn btn--small">Join</button>
+        </form>
+        {%- endif -%}
 
         <div class="social" aria-label="Social links">
           {%- if site.author.social.instagram -%}
