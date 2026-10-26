@@ -20,6 +20,7 @@
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <label for="footer-email" class="sr-only">Email address</label>
           <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
+          <div class="h-captcha h-captcha--footer" data-captcha="true" data-size="compact" data-theme="dark"></div>
           <button type="submit" class="btn btn--small">Join</button>
         </form>
 
@@ -78,4 +79,5 @@
   </div>
 </footer>
 
+<script src="https://web3forms.com/client/script.js" async defer></script>
 <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>

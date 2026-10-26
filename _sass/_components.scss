@@ -583,8 +583,17 @@
 
 .footer__newsletter {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-3);
+}
+
+// hCaptcha's widget is a fixed-size iframe, so give it its own row rather
+// than letting it squeeze the email input and button.
+.footer__newsletter .h-captcha {
+  flex: 0 0 100%;
+  margin-block: var(--space-2);
 }
 
 .footer__newsletter input {

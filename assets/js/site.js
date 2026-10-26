@@ -172,8 +172,19 @@
         e.preventDefault();
         var btn = form.querySelector('[type="submit"]');
         var original = btn ? btn.textContent : '';
-        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
         status.textContent = '';
+
+        // hCaptcha injects a textarea named h-captcha-response once solved.
+        // Web3Forms rejects the submission outright when the form has hCaptcha
+        // enabled, so fail here with a readable message instead.
+        var captcha = form.querySelector('textarea[name="h-captcha-response"]');
+        if (captcha && !captcha.value) {
+          status.textContent = 'Please complete the captcha before sending.';
+          if (captcha.closest('.h-captcha')) { captcha.closest('.h-captcha').scrollIntoView({ block: 'center' }); }
+          return;
+        }
+
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
         var payload = Object.fromEntries(new FormData(form));
 

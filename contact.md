@@ -59,6 +59,8 @@ We'd love to hear from you. For custom orders, wholesale inquiries, collaboratio
     <p class="field__hint">For custom and wholesale, please include quantities, timeline, and any reference imagery.</p>
   </div>
 
+  <div class="h-captcha" data-captcha="true" data-theme="light"></div>
+
   <div class="form__actions">
     <button type="submit" class="btn btn--accent">Send Message</button>
     <span class="muted">Or email <a href="mailto:anna@croakandbloom.com">anna@croakandbloom.com</a></span>

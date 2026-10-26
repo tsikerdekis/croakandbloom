@@ -60,6 +60,28 @@ is public by design, which is expected.
 Domain restriction is a Pro feature and is off by default, so the key works on
 any host including `new.croakandbloom.com`.
 
+### hCaptcha
+
+hCaptcha is enabled **per account**, not per form. Once it is switched on in the
+Web3Forms dashboard, every submission from that access key must carry a token,
+so **all forms using the key need the widget** — leaving one without it makes
+that form fail with `hCaptcha Token is mandatory for this form`.
+
+Markup required on each form:
+
+```html
+<div class="h-captcha" data-captcha="true"></div>
+```
+
+plus the client script (loaded once, from `_includes/footer.html`):
+
+```html
+<script src="https://web3forms.com/client/script.js" async defer></script>
+```
+
+`assets/js/site.js` checks for the injected `h-captcha-response` textarea before
+submitting and shows a readable message rather than letting the request fail.
+
 A Zoho Forms iframe remains available by setting `site.forms.zoho_embed_url`
 (the `formperma` token is mandatory or `forms.zohopublic.com` 302s to login).
 Leave it empty to keep the native styled form.
