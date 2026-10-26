@@ -41,11 +41,21 @@ Personal portfolio and e-commerce website for **Croak and Bloom**, a small-batch
 
 ### Forms
 
-Both forms post to `site.forms.contact_endpoint` in `_config.yml`. Leave it empty
-to use formsubmit.co, which needs no account; the first submission emails a
+The contact page embeds a **Zoho Forms** iframe, configured by
+`site.forms.zoho_embed_url` in `_config.yml`.
+
+**The `formperma` token is mandatory.** Without it,
+`forms.zohopublic.com/<account>/form/<Name>` 302s to `login.jsp` — even for a
+published form. To get the full permalink: open the form in Zoho Forms, go to
+**Publish → Embed → Embed in a website**, and copy the iframe `src`.
+
+Leave `zoho_embed_url` empty to fall back to a native styled form posting to
+formsubmit.co, which needs no account: the first submission emails a
 confirmation link to `site.author.email` and one click activates delivery.
-Paste a Zoho Forms or Formspree endpoint there to switch provider without
-touching any template.
+
+The footer newsletter currently posts to formsubmit.co regardless. To point it
+at Zoho instead, give `site.forms.contact_endpoint` the Zoho form's permalink
+and it will be used for both.
 
 ### Adding New Content
 

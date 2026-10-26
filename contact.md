@@ -9,7 +9,23 @@ nav-menu: true
 
 We'd love to hear from you. For custom orders, wholesale inquiries, collaborations, or just a question about a piece, send a note below and we'll get back to you within a few days.
 
-<form class="form" action="{{ site.forms.contact_endpoint | default: 'https://formsubmit.co/' | append: site.author.email }}" method="POST" aria-label="Contact form">
+{% if site.forms.zoho_embed_url and site.forms.zoho_embed_url != "" %}
+<div class="embed embed--form" markdown="0">
+  <iframe
+    src="{{ site.forms.zoho_embed_url }}"
+    title="Contact form"
+    width="100%"
+    height="840"
+    frameborder="0"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowtransparency="true"></iframe>
+</div>
+<p class="muted text-center mt-4" style="font-size:var(--fs-xs);">
+  Prefer email? Write to <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.
+</p>
+{%- else -%}
+<form class="form" action="{{ site.forms.contact_endpoint | default: 'https://formsubmit.co/' | append: site.author.email }}" method="POST" aria-label="Contact form" markdown="0">
   <input type="hidden" name="_subject" value="New enquiry from croakandbloom.com">
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
@@ -48,6 +64,7 @@ We'd love to hear from you. For custom orders, wholesale inquiries, collaboratio
     <span class="muted">Or email <a href="mailto:anna@croakandbloom.com">anna@croakandbloom.com</a></span>
   </div>
 </form>
+{%- endif -%}
 
 ## Wholesale & Custom
 

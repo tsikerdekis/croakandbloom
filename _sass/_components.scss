@@ -353,6 +353,31 @@
 
 .form__actions { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
 
+// Embedded third-party forms (Zoho). The iframe carries its own styling, so
+// this only frames it: break out of the narrow .prose measure so the vendor
+// form is not squeezed into a 608px column with its own scrollbar.
+.embed--form {
+  margin-block: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elev);
+  width: min(52rem, calc(100vw - var(--space-6)));
+  margin-inline: calc((100% - min(52rem, calc(100vw - var(--space-6)))) / 2);
+}
+
+.embed--form iframe {
+  display: block;
+  width: 100%;
+  min-height: 840px;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .embed--form { width: 100%; margin-inline: 0; }
+  .embed--form iframe { min-height: 950px; }
+}
+
 // ---------------------------------------------------------------------
 // Header
 // ---------------------------------------------------------------------
