@@ -18,13 +18,17 @@ author:
     etsy: https://www.etsy.com/shop/CroakandBloom
 
 # Forms
-# Zoho Forms public permalink. The formperma token is required: without it
-# forms.zohopublic.com redirects to login, even for published forms.
-# Leave zoho_embed_url empty to fall back to formsubmit.co, which needs no
-# account. See AGENTS.md for how to obtain the permalink.
+# Web3Forms (api.web3forms.com) backend: keeps our own styled HTML and just
+# emails submissions to access_key's verified address. Free tier is 250
+# submissions/month, unlimited forms. Get a key at app.web3forms.com.
+# NOTE: Web3Forms only accepts client-side submissions; a server-side POST is
+# rejected, so this must stay a browser form, not a fetch from CI.
 forms:
-  zoho_embed_url: "https://forms.zohopublic.com/croakandbloom1/form/ContactUs/formperma/a9RvGZ-O6uxd5BexzxkXDT9610wWLi3MEaAVnBDjHq8"
+  web3forms_key: "80f5bef9-356c-4a8d-8628-61065b810cdd"
+  # Set to e.g. the Zoho permalink to switch providers. Empty means Web3Forms.
   contact_endpoint: ""
+  # Legacy Zoho embed, kept so the switch can be reverted by restoring this value.
+  zoho_embed_url: ""
 
 # Hostname & base
 baseurl: ""

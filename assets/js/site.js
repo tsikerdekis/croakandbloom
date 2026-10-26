@@ -148,6 +148,59 @@
   }
 
   // -------------------------------------------------------------------
+  // Form submission (Web3Forms) via fetch, so the success redirect is
+  // handled in-page rather than by the provider. Avoids Web3Forms'
+  // same-domain redirect requirement, and keeps the visitor on our
+  // /thanks/ page even when previewing on a different host.
+  // -------------------------------------------------------------------
+  function initForms() {
+    var forms = document.querySelectorAll('form[action*="api.web3forms.com"]');
+    if (!forms.length) return;
+
+    Array.prototype.forEach.call(forms, function (form) {
+      var status = form.querySelector('[data-form-status]');
+      if (!status) {
+        status = document.createElement('p');
+        status.setAttribute('data-form-status', '');
+        status.setAttribute('role', 'status');
+        status.setAttribute('aria-live', 'polite');
+        status.style.cssText = 'margin-top:var(--space-3);font-size:var(--fs-sm);';
+        form.appendChild(status);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('[type="submit"]');
+        var original = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        status.textContent = '';
+
+        var payload = Object.fromEntries(new FormData(form));
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.success) {
+              window.location.href = form.getAttribute('data-thanks') || '/thanks/';
+            } else {
+              status.textContent = data.message || 'Something went wrong. Please email us instead.';
+            }
+          })
+          .catch(function () {
+            status.textContent = 'Something went wrong. Please email us instead.';
+          })
+          .then(function () {
+            if (btn) { btn.disabled = false; btn.textContent = original; }
+          });
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------
   // Boot
   // -------------------------------------------------------------------
   if (document.readyState === 'loading') {
@@ -162,5 +215,6 @@
     initLightbox();
     initSmoothScroll();
     markCurrentNav();
+    initForms();
   }
 })();

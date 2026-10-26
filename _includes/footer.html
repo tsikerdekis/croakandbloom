@@ -10,28 +10,18 @@
         <p class="muted-light" style="margin-top:.5rem;max-width:32ch;">{{ site.description | truncate: 140 }}</p>
 
         {%- comment -%}
-          Newsletter posts to the same endpoint as the contact form, so there is
-          one place to configure. Without an endpoint there is no working form,
-          so fall back to a mailto link rather than a dead POST.
+          Newsletter uses the same Web3Forms key as the contact form, so there is
+          one place to configure and one inbox to check.
         {%- endcomment -%}
-        {%- assign fep = site.forms.contact_endpoint -%}
-        {%- if fep and fep != "" -%}
-        <form class="footer__newsletter" action="{{ fep }}" method="POST" aria-label="Subscribe to the newsletter">
-          <input type="hidden" name="_subject" value="Newsletter signup from croakandbloom.com">
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <form class="footer__newsletter" action="{{ site.forms.contact_endpoint | default: 'https://api.web3forms.com/submit' }}" method="POST" aria-label="Subscribe to the newsletter" data-thanks="{{ '/thanks/' | relative_url }}">
+          <input type="hidden" name="access_key" value="{{ site.forms.web3forms_key }}">
+          <input type="hidden" name="subject" value="Newsletter signup from croakandbloom.com">
+          <input type="hidden" name="from_name" value="Croak and Bloom website">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <label for="footer-email" class="sr-only">Email address</label>
           <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
           <button type="submit" class="btn btn--small">Join</button>
         </form>
-        {%- else -%}
-        <form class="footer__newsletter" action="https://formsubmit.co/{{ site.author.email }}" method="POST" aria-label="Subscribe to the newsletter">
-          <input type="hidden" name="_subject" value="Newsletter signup from croakandbloom.com">
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-          <label for="footer-email" class="sr-only">Email address</label>
-          <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-          <button type="submit" class="btn btn--small">Join</button>
-        </form>
-        {%- endif -%}
 
         <div class="social" aria-label="Social links">
           {%- if site.author.social.instagram -%}

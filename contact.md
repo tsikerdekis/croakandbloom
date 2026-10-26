@@ -24,12 +24,12 @@ We'd love to hear from you. For custom orders, wholesale inquiries, collaboratio
 <p class="muted text-center mt-4" style="font-size:var(--fs-xs);">
   Prefer email? Write to <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.
 </p>
-{%- else -%}
-<form class="form" action="{{ site.forms.contact_endpoint | default: 'https://formsubmit.co/' | append: site.author.email }}" method="POST" aria-label="Contact form" markdown="0">
-  <input type="hidden" name="_subject" value="New enquiry from croakandbloom.com">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
-  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+{% else %}
+<form class="form" action="{{ site.forms.contact_endpoint | default: 'https://api.web3forms.com/submit' }}" method="POST" aria-label="Contact form" markdown="0" data-thanks="{{ '/thanks/' | relative_url }}">
+  <input type="hidden" name="access_key" value="{{ site.forms.web3forms_key }}">
+  <input type="hidden" name="subject" value="New enquiry from croakandbloom.com">
+  <input type="hidden" name="from_name" value="Croak and Bloom website">
+  <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
   <div class="form__row form__row--2">
     <div class="field">
       <label for="name">Your name</label>

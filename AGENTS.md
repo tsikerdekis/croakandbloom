@@ -41,21 +41,28 @@ Personal portfolio and e-commerce website for **Croak and Bloom**, a small-batch
 
 ### Forms
 
-The contact page embeds a **Zoho Forms** iframe, configured by
-`site.forms.zoho_embed_url` in `_config.yml`.
+Both forms (contact and footer newsletter) post to **Web3Forms**
+(`api.web3forms.com`) using `site.forms.web3forms_key` from `_config.yml`.
+Web3Forms is a form *backend*, not a form builder: the HTML stays ours and styled,
+it just forwards submissions to the verified inbox. Free tier is 250
+submissions/month and unlimited forms.
 
-**The `formperma` token is mandatory.** Without it,
-`forms.zohopublic.com/<account>/form/<Name>` 302s to `login.jsp` — even for a
-published form. To get the full permalink: open the form in Zoho Forms, go to
-**Publish → Embed → Embed in a website**, and copy the iframe `src`.
+Submissions are sent with `fetch` from `assets/js/site.js`, not a plain form POST.
+That matters: Web3Forms' `redirect` field only permits same-domain redirects on
+the free plan, so a plain POST would strand visitors on Web3Forms' own success
+page whenever the page is served from a host other than `site.url` (previews,
+custom domains). The JS handler redirects to `/thanks/` in-page instead.
 
-Leave `zoho_embed_url` empty to fall back to a native styled form posting to
-formsubmit.co, which needs no account: the first submission emails a
-confirmation link to `site.author.email` and one click activates delivery.
+**Web3Forms rejects server-side POSTs** ("Use our API in client side"), so the
+form cannot be tested with curl; it needs a real browser. It also means the key
+is public by design, which is expected.
 
-The footer newsletter currently posts to formsubmit.co regardless. To point it
-at Zoho instead, give `site.forms.contact_endpoint` the Zoho form's permalink
-and it will be used for both.
+Domain restriction is a Pro feature and is off by default, so the key works on
+any host including `new.croakandbloom.com`.
+
+A Zoho Forms iframe remains available by setting `site.forms.zoho_embed_url`
+(the `formperma` token is mandatory or `forms.zohopublic.com` 302s to login).
+Leave it empty to keep the native styled form.
 
 ### Adding New Content
 
