@@ -705,38 +705,6 @@
 
 .footer__list { list-style: none; padding: 0; display: grid; gap: var(--space-2); font-size: var(--fs-sm); }
 
-.footer__newsletter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
-
-// hCaptcha's widget is a fixed-size iframe, so give it its own row rather
-// than letting it squeeze the email input and button.
-.footer__newsletter .h-captcha {
-  flex: 0 0 100%;
-  margin-block: var(--space-2);
-}
-
-.footer__newsletter input {
-  flex: 1;
-  padding: 0.7em 0.9em;
-  background: transparent;
-  color: var(--fg-inv);
-  border: 1px solid var(--border-inv);
-  border-radius: var(--radius);
-}
-
-.footer__newsletter input::placeholder { color: var(--fg-inv-muted); }
-
-.footer__newsletter .btn {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
 .footer__bottom {
   margin-top: var(--space-7);
   padding-top: var(--space-5);

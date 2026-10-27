@@ -11,7 +11,7 @@ Personal portfolio and e-commerce website for **Croak and Bloom**, a small-batch
 | Static site generator | Jekyll 4.4 |
 | Styling | SASS → CSS via `jekyll-sass-converter` |
 | JavaScript | Vanilla JS, ~2.5kb, no dependencies |
-| Forms | Formspree.io (contact + newsletter) |
+| Forms | Web3Forms (contact form) |
 | SEO | `jekyll-seo-tag`, `jekyll-sitemap`, JSON-LD structured data |
 | Fonts | Google Fonts (Cormorant Garamond, Inter) + local @font-face (Breathing) |
 | CI/CD | GitLab CI |
@@ -41,8 +41,8 @@ Personal portfolio and e-commerce website for **Croak and Bloom**, a small-batch
 
 ### Forms
 
-Both forms (contact and footer newsletter) post to **Web3Forms**
-(`api.web3forms.com`) using `site.forms.web3forms_key` from `_config.yml`.
+The contact form posts to **Web3Forms** (`api.web3forms.com`) using
+`site.forms.web3forms_key` from `_config.yml`.
 Web3Forms is a form *backend*, not a form builder: the HTML stays ours and styled,
 it just forwards submissions to the verified inbox. Free tier is 250
 submissions/month and unlimited forms.
@@ -64,8 +64,8 @@ any host including `new.croakandbloom.com`.
 
 hCaptcha is enabled **per account**, not per form. Once it is switched on in the
 Web3Forms dashboard, every submission from that access key must carry a token,
-so **all forms using the key need the widget** — leaving one without it makes
-that form fail with `hCaptcha Token is mandatory for this form`.
+so **any form added later using the key also needs the widget** — leaving one
+without it makes that form fail with `hCaptcha Token is mandatory for this form`.
 
 Markup required on each form:
 
@@ -178,7 +178,7 @@ All layouts extend `_layouts/default.html`, which provides:
 - Skip-to-content link
 - `{% include header.html %}` — sticky header with nav + mobile drawer
 - `<main id="main" role="main">` — content slot
-- `{% include footer.html %}` — 4-column footer with newsletter, social, links
+- `{% include footer.html %}` — 4-column footer with social, links
 
 `_includes/head.html` handles: meta tags, OG/Twitter cards, canonical URLs, JSON-LD (Person/Organization/WebSite/VisualArtwork), font preloading, stylesheet link.
 

@@ -1,5 +1,5 @@
 {%- comment -%}
-  footer.html — site footer: brand, navigation columns, newsletter, social.
+  footer.html — site footer: brand, navigation columns, social.
 {%- endcomment -%}
 <footer class="site-footer" role="contentinfo">
   <div class="container">
@@ -8,21 +8,6 @@
       <div>
         <p class="footer__brand">{{ site.title }}</p>
         <p class="muted-light" style="margin-top:.5rem;max-width:32ch;">{{ site.description | truncate: 140 }}</p>
-
-        {%- comment -%}
-          Newsletter uses the same Web3Forms key as the contact form, so there is
-          one place to configure and one inbox to check.
-        {%- endcomment -%}
-        <form class="footer__newsletter" action="{{ site.forms.contact_endpoint | default: 'https://api.web3forms.com/submit' }}" method="POST" aria-label="Subscribe to the newsletter" data-thanks="{{ '/thanks/' | relative_url }}">
-          <input type="hidden" name="access_key" value="{{ site.forms.web3forms_key }}">
-          <input type="hidden" name="subject" value="Newsletter signup from croakandbloom.com">
-          <input type="hidden" name="from_name" value="Croak and Bloom website">
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-          <label for="footer-email" class="sr-only">Email address</label>
-          <input id="footer-email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-          <div class="h-captcha h-captcha--footer" data-captcha="true" data-size="compact" data-theme="dark"></div>
-          <button type="submit" class="btn btn--small">Join</button>
-        </form>
 
         <div class="social" aria-label="Social links">
           {%- if site.author.social.instagram -%}
