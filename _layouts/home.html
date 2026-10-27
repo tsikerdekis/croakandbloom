@@ -27,13 +27,32 @@ layout: default
   </div>
 </section>
 
-<section class="section">
+<section class="section press">
   <div class="container">
-    <div class="prose text-center" style="margin-inline:auto;">
-      <span class="eyebrow">Studio Note</span>
-      <h2 class="mt-4">Quiet objects, made by hand.</h2>
-      <p class="lead" style="margin:1.5rem auto 0;">{{ page.description | default: site.description | strip_html }}</p>
-      <p class="mt-4" style="font-size:var(--fs-sm);color:var(--fg-muted);">As featured in <strong>BuzzFeed</strong>, <strong>The Seattle Times</strong>, and <strong>Washington Wedding Day Magazine</strong>.</p>
+    <div class="press__grid">
+
+      <div class="press__statement">
+        <h2 class="press__headline">Quiet objects,<br>made by <em>hand</em>.</h2>
+      </div>
+
+      <div class="press__media">
+        <span class="press__label">Featured in</span>
+        <ul class="press__list" role="list">
+          <li class="press__item">
+            <span class="press__index" aria-hidden="true">01</span>
+            <span class="press__mark press__mark--buzzfeed">BuzzFeed</span>
+          </li>
+          <li class="press__item">
+            <span class="press__index" aria-hidden="true">02</span>
+            <span class="press__mark press__mark--times">The Seattle Times</span>
+          </li>
+          <li class="press__item">
+            <span class="press__index" aria-hidden="true">03</span>
+            <span class="press__mark press__mark--wwd">Washington Wedding Day</span>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>

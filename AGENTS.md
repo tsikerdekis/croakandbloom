@@ -113,7 +113,10 @@ image: /assets/images/...
 ---
 ```
 
-**New process step** — add to `process.md` `steps` array:
+**New process step** — add to `process.md` `steps` array. Steps are numbered
+automatically by a CSS counter, so adding or removing an entry renumbers the
+rest with no manual edits. Keep the `intro` sentence's step count in step with
+the array length.
 ```yaml
   - title: Step Name
     image: /assets/images/process-XX-name.jpg

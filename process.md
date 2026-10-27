@@ -5,14 +5,8 @@ permalink: /process/
 description: How a piece of Croak and Bloom pottery is made, from raw clay to finished stoneware.
 eyebrow: Behind the Scenes
 image: /assets/images/pic01.jpg
-intro: Each piece from Croak and Bloom is the product of seven quiet steps. There are no shortcuts. The wheel, the kiln, and the slow accumulation of time do most of the work.
+intro: Each piece from Croak and Bloom is the product of six quiet steps. There are no shortcuts. The wheel, the kiln, and the slow accumulation of time do most of the work.
 steps:
-  - title: Wedging
-    image: /assets/images/process-01-wedging.jpg
-    anim: /assets/images/process-01-wedging.webp
-    alt: Hands pressing and folding a ball of clay on the workbench to work out air bubbles
-    description: Before a single piece is thrown, the stoneware clay is wedged by hand to remove air bubbles and bring the moisture to a uniform consistency. It is meditative, physical work, and it is the first quiet conversation with the material.
-
   - title: Throwing
     image: /assets/images/process-02-throwing.jpg
     alt: Anna at the pottery wheel, holding a ball of clay in each hand before centering it
