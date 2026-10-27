@@ -228,6 +228,9 @@ SASS is compiled and minified (`style: compressed`) by the Jekyll plugin. No sep
 - Use `relative_url` filter for all asset/permalink paths
 - Keep inline styles minimal; prefer utility classes or `_sass/_components.scss`
 - Image filenames follow `picXX.jpg` pattern for photos, `process-XX-name.jpg` for process steps
+- Press logos live in `assets/images/press/` and are inlined-vector SVGs with every
+  fill set to `currentColor`, so CSS tints them. Add new marks the same way rather
+  than as bitmaps.
 - Add `alt` text to all images; required for both accessibility and SEO
 - Exclude development files in `_config.yml` `exclude` list before deploying
 

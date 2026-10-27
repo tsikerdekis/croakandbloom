@@ -112,4 +112,5 @@ exclude:
   - "assets/images/desc.txt"
   - "assets/images/instagram_posts_map.txt"
   - "assets/images/REPLACEMENT-REPORT.md"
+  - "assets/images/press/README.md"
   - "*.log"

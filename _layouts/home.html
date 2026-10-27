@@ -40,15 +40,21 @@ layout: default
         <ul class="press__list" role="list">
           <li class="press__item">
             <span class="press__index" aria-hidden="true">01</span>
-            <span class="press__mark press__mark--buzzfeed">BuzzFeed</span>
+            <img class="press__logo press__logo--buzzfeed"
+                 src="{{ '/assets/images/press/buzzfeed.svg' | relative_url }}?v={{ site.time | date: '%s' }}"
+                 alt="BuzzFeed" width="314" height="52" loading="lazy" decoding="async">
           </li>
           <li class="press__item">
             <span class="press__index" aria-hidden="true">02</span>
-            <span class="press__mark press__mark--times">The Seattle Times</span>
+            <img class="press__logo press__logo--times"
+                 src="{{ '/assets/images/press/seattletimes.svg' | relative_url }}?v={{ site.time | date: '%s' }}"
+                 alt="The Seattle Times" width="637" height="95" loading="lazy" decoding="async">
           </li>
           <li class="press__item">
             <span class="press__index" aria-hidden="true">03</span>
-            <span class="press__mark press__mark--wwd">Washington Wedding Day</span>
+            <img class="press__logo press__logo--wwd"
+                 src="{{ '/assets/images/press/wwd.svg' | relative_url }}?v={{ site.time | date: '%s' }}"
+                 alt="Washington Wedding Day" width="609" height="132" loading="lazy" decoding="async">
           </li>
         </ul>
       </div>

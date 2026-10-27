@@ -104,28 +104,27 @@
   color: var(--accent);
 }
 
-// Each mark borrows a little of the publication's own typographic voice.
-.press__mark--buzzfeed {
-  font-family: var(--font-body);
-  font-size: var(--fs-lg);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+// Logos are SVGs with every fill set to currentColor, so they tint with the
+// surrounding text colour instead of shipping a second set of black assets.
+// Each is scaled by height to a common optical weight; the wordmarks differ in
+// width, so width stays auto and the intrinsic aspect ratio governs.
+.press__logo {
+  display: block;
+  width: auto;
+  height: 26px;
+  color: var(--ink);
+  opacity: 0.74;
+  transition: opacity var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
-.press__mark--times {
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  font-weight: 500;
-  font-style: italic;
+.press__item:hover .press__logo {
+  opacity: 1;
+  color: var(--accent);
 }
 
-.press__mark--wwd {
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
+.press__logo--buzzfeed   { height: 24px; }
+.press__logo--times      { height: 30px; }
+.press__logo--wwd        { height: 40px; }
 
 // ---------------------------------------------------------------------
 // Buttons
